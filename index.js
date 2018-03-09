@@ -19,11 +19,14 @@ try{
 }
 
 client.on('connect', function () {
-    client.readHoldingRegisters(0, 10).then(function (resp) {
+  setInterval(function(){
+    client.readHoldingRegisters(0, 4).then(function (resp) {
         console.log(resp.register);
     }, console.error);
+  },1000);
 });
 
 client.on('error', function (err) {
     console.log(err);
+    clearInterval(intIdW2);
 });
