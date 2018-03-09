@@ -113,8 +113,7 @@ var DataBits=function(num1) {
   return bits;
 };
 
-
-function publishMessage(mensaje) {
+var publishMessage =  function (mensaje) {
         var publishConfig = {
             channel : "burslington_channel",
             message : {
@@ -129,7 +128,4 @@ function publishMessage(mensaje) {
                 "cool": "meta"
             } // publish extra meta with the request
         };
-        pubnub.publish(publishConfig, function(status, response) {
-            console.log(status, response);
-        });
-    }
+    };
