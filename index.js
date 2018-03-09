@@ -3,7 +3,7 @@ var fs = require('fs');
 
 //Init firestore
 var admin = require('firebase-admin');
-var serviceAccount = require("/credenciales/dbtest-a9f64-firebase-adminsdk-k8qiu-bb52ed8e2a.json");
+var serviceAccount = require("./credenciales/dbtest-a9f64-firebase-adminsdk-k8qiu-bb52ed8e2a.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
