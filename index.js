@@ -38,7 +38,7 @@ var DataBits=function(num1) {
   var bin1 = num1.toString(2);
   var newNum = bits.split("");
   for(var i=0;i<bin1.length;i++){
-    newNum[15-i] = bin1[bin1.length - i];
+    newNum[15-i] = bin1[(bin1.length - 1)-i];
   }
   bits = newNum.join("");
   return bits;
