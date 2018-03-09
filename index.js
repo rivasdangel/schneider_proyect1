@@ -37,7 +37,7 @@ var DataBits=function(num1) {
   var bits = "0000000000000000";
   var bin1 = num1.toString(2);
   for(var i=0;i<bin1.length;i++){
-    bits[15-i] = bin1[(bin1.length - 1) - i];
+    bits[15-i] = bin1[i];
   }
   return bits;
 };
