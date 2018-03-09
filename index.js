@@ -21,7 +21,8 @@ try{
 client.on('connect', function () {
   setInterval(function(){
     client.readHoldingRegisters(0, 4).then(function (resp) {
-        console.log(resp.register);
+        //console.log(resp.register);
+        console.log(DataBits(resp.register[0]));
     }, console.error);
   },1000);
 });
@@ -30,3 +31,9 @@ client.on('error', function (err) {
     console.log(err);
     clearInterval(intIdW2);
 });
+
+
+var DataBits=function(num1) {
+  var bin1 = num1.toString(2);
+  return bin1;
+};
