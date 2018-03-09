@@ -9,8 +9,18 @@ admin.initializeApp({
 });
 
 var db = admin.firestore();
-var dataDoor;
-var dataAlarm;
+var dataDoor = {
+  desc : "Puerta 1 de emergencia: Abierta",
+  ttActive : null,
+  name : "Puerta1",
+  alarmstate : false
+};
+var dataAlarm = {
+  desc : "Alarma contra incendios: Activa",
+  ttActive : null,
+  name : "AlarmaFuego",
+  alarmstate : false
+};
 var flagDoorOpen=false;
 var flagAlarmActive=false;
 
@@ -41,9 +51,7 @@ client.on('connect', function () {
         //console.log(DataBits(resp.register[0]));
         if(DataBits(resp.register[0])[15]==1){
           if(!flagDoorOpen){
-            dataDoor.desc = "Puerta 1 de emergencia: Abierta";
             dataDoor.ttActive = new Date().getTime();
-            dataDoor.name = "Puerta1";
             dataDoor.alarmstate = true;
             db.collection('dbEventos').add(dataDoor).then(function(ref){
                 idDoor = ref.id;
@@ -61,9 +69,7 @@ client.on('connect', function () {
 
         if(DataBits(resp.register[0])[14]==1){
           if(!flagAlarmActive){
-            dataAlarm.desc = "Alarma contra incendios: Activa";
             dataAlarm.ttActive = new Date().getTime();
-            dataAlarm.name = "AlarmaFuego";
             dataAlarm.alarmstate = true;
             var addDoc = db.collection('dbEventos').add(dataAlarm).then(function(ref){
                 idAlarm = ref.id;
