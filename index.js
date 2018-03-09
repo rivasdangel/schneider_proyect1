@@ -1,6 +1,12 @@
 var modbus = require('jsmodbus');
 var fs = require('fs');
+var PubNub = require('pubnub');
 
+pubnub = new PubNub({
+    publishKey : 'pub-c-4348e254-4e80-4cc7-929f-357abb4b4908',
+    subscribeKey : 'sub-c-f49072d4-18bd-11e8-b857-da98488f5703',
+    uuid: "burlingtonAlarms"
+});
 //Init firestore
 var admin = require('firebase-admin');
 var serviceAccount = require("./credenciales/dbtest-a9f64-firebase-adminsdk-k8qiu-bb52ed8e2a.json");
@@ -58,6 +64,7 @@ client.on('connect', function () {
                 console.log('Added document with ID: ', ref.id);
             });
             flagDoorOpen=true;
+            publishMessage(dataDoor);
           }
         }else{
           if(flagDoorOpen){
@@ -76,6 +83,7 @@ client.on('connect', function () {
                 console.log('Added document with ID: ', ref.id);
             });
             flagAlarmActive = true;
+            publishMessage(dataAlarm);
           }
         }else{
           if(flagAlarmActive){
@@ -104,3 +112,24 @@ var DataBits=function(num1) {
   bits = newNum.join("");
   return bits;
 };
+
+
+function publishMessage(mensaje) {
+        var publishConfig = {
+            channel : "burslington_channel",
+            message : {
+                name: mensaje.name,
+                ubicacion: "Acabado",
+                mensaje: mensaje.desc,
+                tipo: "Alarma"
+            },
+            sendByPost: false, // true to send via post
+            storeInHistory: false, //override default storage options
+            meta: {
+                "cool": "meta"
+            } // publish extra meta with the request
+        };
+        pubnub.publish(publishConfig, function(status, response) {
+            console.log(status, response);
+        });
+    }
