@@ -7,7 +7,7 @@ var client = modbus.client.tcp.complete({
         'autoReconnect'     : true,
         'reconnectTimeout'  : 10000,
         'timeout'           : 50000,
-        'unitId'            : 0
+        'unitId'            : 1
     });
 try{
   client.connect();
