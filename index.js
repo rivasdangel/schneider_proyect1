@@ -36,8 +36,10 @@ client.on('error', function (err) {
 var DataBits=function(num1) {
   var bits = "0000000000000000";
   var bin1 = num1.toString(2);
+  var newNum = bits.split("");
   for(var i=0;i<bin1.length;i++){
-    bits[15-i] = bin1[i];
+    newNum[15-i] = bin1[bin1.length - i];
   }
+  bits = newNum.join("");
   return bits;
 };
