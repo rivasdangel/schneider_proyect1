@@ -24,7 +24,7 @@ var dataDoor = {
 var dataAlarm = {
   desc : "Alarma contra incendios: Activa",
   ttActive : null,
-  name : "AlarmaFuego",
+  name : "Alarma contra incendios.",
   alarmstate : false
 };
 var flagDoorOpen=false;
@@ -129,6 +129,6 @@ var publishMessage =  function (mensaje) {
             } // publish extra meta with the request
         };
         pubnub.publish(publishConfig, function(status, response) {
-            
+
         });
     };
