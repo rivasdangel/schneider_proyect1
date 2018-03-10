@@ -128,4 +128,7 @@ var publishMessage =  function (mensaje) {
                 "cool": "meta"
             } // publish extra meta with the request
         };
+        pubnub.publish(publishConfig, function(status, response) {
+            
+        });
     };
