@@ -55,7 +55,7 @@ client.on('connect', function () {
     client.readHoldingRegisters(0, 4).then(function (resp) {
         //console.log(resp.register);
         //console.log(DataBits(resp.register[0]));
-        if(DataBits(resp.register[0])[15]==1){
+        if(DataBits(resp.register[0])[15]==0){
           if(!flagDoorOpen){
             dataDoor.ttActive = new Date().getTime();
             dataDoor.alarmstate = true;
@@ -73,6 +73,14 @@ client.on('connect', function () {
             flagDoorOpen=false;
           }
         }
+        setInterval(function(){
+          if(flagDoorOpen){
+              publishMessage(dataDoor);
+          }
+          if(flagAlarmActive){
+              publishMessage(dataDoor);
+          }
+        },15000);
 
         if(DataBits(resp.register[0])[14]==1){
           if(!flagAlarmActive){
