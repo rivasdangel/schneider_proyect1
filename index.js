@@ -73,14 +73,6 @@ client.on('connect', function () {
             flagDoorOpen=false;
           }
         }
-        setInterval(function(){
-          if(flagDoorOpen){
-              publishMessage(dataDoor);
-          }
-          if(flagAlarmActive){
-              publishMessage(dataDoor);
-          }
-        },15000);
 
         if(DataBits(resp.register[0])[14]==1){
           if(!flagAlarmActive){
@@ -102,6 +94,15 @@ client.on('connect', function () {
         }
     }, console.error);
   },1000);
+
+  setInterval(function(){
+    if(flagDoorOpen){
+        publishMessage(dataDoor);
+    }
+    if(flagAlarmActive){
+        publishMessage(dataDoor);
+    }
+  },15000);
 });
 
 client.on('error', function (err) {
