@@ -24,7 +24,7 @@ var dataDoor = {
 var dataAlarm = {
   desc : "Alarma contra incendios: Activa",
   ttActive : null,
-  name : "Alarma contra incendios.",
+  name : "Alarma contra incendios 1.",
   alarmstate : false
 };
 var flagDoorOpen=false;
