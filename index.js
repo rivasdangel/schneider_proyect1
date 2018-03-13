@@ -57,7 +57,7 @@ try{
 
 client.on('connect', function () {
   setInterval(function(){
-    try{
+
       client.readHoldingRegisters(0, 4).then(function (resp) {
           //console.log(resp.register);
           //console.log(DataBits(resp.register[0]));
@@ -98,10 +98,7 @@ client.on('connect', function () {
               flagAlarmActive=false;
             }
           }
-      }, console.error);
-    }catch(error){
-      console.log("Error Read data.");
-    }
+      });
   },1000);
 
   setInterval(function(){
